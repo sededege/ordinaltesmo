@@ -1,5 +1,5 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useStateValue } from "../context/StateProvider";
 import { actionType } from "../context/reducer";
 import { GiTwoCoins } from "react-icons/gi";
@@ -24,8 +24,11 @@ import logo from "../img/logo.jpg";
 import ProgressBar from "./ProgressBar";
 import Overlay from "../img/ordinal.png";
 import { hashlist } from "./hashlist";
+
 const Ordinal = () => {
-  const [{ cartShow, products, ordinal }, dispatch] = useStateValue();
+  const [{ cartShow, products /* ordinal */ }, dispatch] = useStateValue();
+  const ordinal =
+    "bc1pjcnr0ts6mg3m8wf2qavzkj0a5n6uqrdaypdwvwsmz52gus0m3tqqh9w988";
   const [scrollValue] = useState(0);
   const [stake, setStake] = useState([]);
   const [select, setSelect] = useState([]);
@@ -236,6 +239,8 @@ const Ordinal = () => {
   };
 
   useEffect(() => {
+  
+
     const first = async () => {
       setAllUsers(await getAllUsuarios());
     };
@@ -262,9 +267,14 @@ const Ordinal = () => {
     const fetchData = async () => {
       setNfts([]);
       setNfts2([]);
+
       try {
+        const offset = 1;
         const response = await fetch(
-          `https://api.hiro.so/ordinals/v1/inscriptions?address=${ordinal}`
+          `https://api.hiro.so/ordinals/v1/inscriptions?address=${ordinal}&limit=60`,
+          {
+            offset: 10,
+          }
         );
         const jsonData = await response.json();
         console.log(jsonData);
@@ -274,7 +284,7 @@ const Ordinal = () => {
               ...prev,
               {
                 id: a.id,
-                imageUrl: `https://api.hiro.so/ordinals/v1/inscriptions/${a.id}/content`,
+                imageUrl: `https://ord-mirror.magiceden.dev/content/${a.id}`,
                 name: a.number,
                 tokenAddress: a.number,
               },
@@ -284,7 +294,7 @@ const Ordinal = () => {
               ...prev,
               {
                 id: a.id,
-                imageUrl: `https://api.hiro.so/ordinals/v1/inscriptions/${a.id}/content`,
+                imageUrl: `https://ord-mirror.magiceden.dev/content/${a.id}`,
                 name: a.number,
                 tokenAddress: a.number,
               },
@@ -311,6 +321,7 @@ const Ordinal = () => {
     return result;
   };
 
+  console.log(nfts);
   const pointsearn = (a, points) => {
     const d = new Date();
 
@@ -598,9 +609,10 @@ const Ordinal = () => {
                           >
                             <img
                               className="w-[100px] object-contain mx-auto rounded-lg"
-                              src={a.imageUrl}
+                              src={`https://img-cdn.magiceden.dev/plain/https%3A%2F%2Frenderer.magiceden.workers.dev%2F%3Furl%3Dhttps%3A%2F%2Ford-mirror.magiceden.dev%2Fcontent%2F${a.id}`}
                               alt="nft"
                             />
+
                             <p className="text-white text-center text-[0.9rem] mt-2">
                               {a.name}
                             </p>
@@ -631,17 +643,19 @@ const Ordinal = () => {
                               </svg>
                               <span className="sr-only">Loading...</span>
                             </div>
-                          ) : ordinal && (
-                            <div className="flex flex-col text-white w-[200px] text-center gap-4">
-                              You don't have any Thesmophoria  NFT.
-                              <a
-                                href="https://magiceden.io/marketplace/tesmophoria"
-                                className="p-2 bg-orange-500 rounded-lg"
-                              >
-                                Enter on Valhalla.
-                              </a>
-                            </div>
-                          ) }
+                          ) : (
+                            ordinal && (
+                              <div className="flex flex-col text-white w-[200px] text-center gap-4">
+                                You don't have any Thesmophoria NFT.
+                                <a
+                                  href="https://magiceden.io/marketplace/tesmophoria"
+                                  className="p-2 bg-orange-500 rounded-lg"
+                                >
+                                  Enter on Valhalla.
+                                </a>
+                              </div>
+                            )
+                          )}
                         </div>
                       )}
                     </div>
@@ -756,9 +770,9 @@ const Ordinal = () => {
                                 : "bg-tesmo"
                             }  mx-auto transition-all 2s ease-in border-[1px] border-tesmo cursor-pointer   h-[160px] md:h-[120px] lg:h-[11vw]   hover:bg-tesmo2  p-2 rounded-lg`}
                           >
-                            <img
+                           <img
                               className="w-[100px] object-contain mx-auto rounded-lg"
-                              src={a.imageUrl}
+                              src={`https://img-cdn.magiceden.dev/plain/https%3A%2F%2Frenderer.magiceden.workers.dev%2F%3Furl%3Dhttps%3A%2F%2Ford-mirror.magiceden.dev%2Fcontent%2F${a.id}`}
                               alt="nft"
                             />
                             <p className="text-white text-center text-[0.8rem] mt-2">
@@ -794,18 +808,19 @@ const Ordinal = () => {
                               </svg>
                               <span class="sr-only">Loading...</span>
                             </div>
-                          ) : ordinal && (
-                            <div className="flex flex-col text-white w-[200px] text-center gap-4">
-                              You don't have any Thesmophoria Ordinal NFT.
-                             
-                              <a
-                                href="https://magiceden.io/marketplace/tesmophoria"
-                                className="p-2 bg-orange-500 rounded-lg"
-                              >
-                                Enter on Valhalla.
-                              </a>
-                            </div>
-                          ) }
+                          ) : (
+                            ordinal && (
+                              <div className="flex flex-col text-white w-[200px] text-center gap-4">
+                                You don't have any Thesmophoria Ordinal NFT.
+                                <a
+                                  href="https://magiceden.io/marketplace/tesmophoria"
+                                  className="p-2 bg-orange-500 rounded-lg"
+                                >
+                                  Enter on Valhalla.
+                                </a>
+                              </div>
+                            )
+                          )}
                         </div>
                       )}
                     </div>

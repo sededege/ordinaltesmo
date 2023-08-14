@@ -26,9 +26,9 @@ import Overlay from "../img/ordinal.png";
 import { hashlist } from "./hashlist";
 
 const Ordinal = () => {
-  const [{ cartShow, products /* ordinal */ }, dispatch] = useStateValue();
-  const ordinal =
-    "bc1pjcnr0ts6mg3m8wf2qavzkj0a5n6uqrdaypdwvwsmz52gus0m3tqqh9w988";
+  const [{ cartShow, products, ordinal }, dispatch] = useStateValue();
+/*   const ordinal =
+    "bc1pjcnr0ts6mg3m8wf2qavzkj0a5n6uqrdaypdwvwsmz52gus0m3tqqh9w988"; */
   const [scrollValue] = useState(0);
   const [stake, setStake] = useState([]);
   const [select, setSelect] = useState([]);

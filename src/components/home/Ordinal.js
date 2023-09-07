@@ -27,7 +27,7 @@ import { hashlist } from "./hashlist";
 
 const Ordinal = () => {
   const [{ cartShow, products, ordinal }, dispatch] = useStateValue();
-/*   const ordinal =
+  /* const ordinal =
     "bc1pjcnr0ts6mg3m8wf2qavzkj0a5n6uqrdaypdwvwsmz52gus0m3tqqh9w988"; */
   const [scrollValue] = useState(0);
   const [stake, setStake] = useState([]);
@@ -44,7 +44,7 @@ const Ordinal = () => {
   const [loading2, setLoading2] = useState(true);
   const [data1, setData] = useState([]);
   const [msg, setMsg] = useState(true);
-  let qtyxhr = 10;
+  let qtyxhr = 150;
   let supply = 1020;
   const [update, setUpdate] = useState();
   let puntoss = 0;
@@ -384,7 +384,7 @@ const Ordinal = () => {
       setStake([]);
     } else if (a === "claimall") {
       let result = [];
-      updatestake(stake).map((a) => pointsearn(a.snapshot, a.points));
+      updatestake(stake).map((a) => pointsearn(a.snapshot, 150));
       setClaimed(true);
 
       nfts2.forEach((e) =>
@@ -417,7 +417,7 @@ const Ordinal = () => {
       updatePoints(datapoints);
     } else if (a === "claimdiamond") {
       let result = [];
-      updatestake(stake).map((a) => pointsearn(a.snapshot, a.points));
+      updatestake(stake).map((a) => pointsearn(a.snapshot, 150));
       setClaimed(true);
 
       nfts2.forEach((e) =>
@@ -781,7 +781,7 @@ const Ordinal = () => {
                             <div className="text-center text-yellow-300 font-bold flex justify-center  items-center gap-2 ">
                               <GiTwoCoins />{" "}
                               <p className="text-yellow-500 font text-[1rem]">
-                                {a.points}
+                                150
                               </p>
                             </div>
                           </motion.div>
@@ -839,7 +839,7 @@ const Ordinal = () => {
                           <p className="text-yellow-500 font ">
                             {stake &&
                               updatestake(stake).map((a) =>
-                                pointsearn2(a.points)
+                                pointsearn2(150)
                               )}
                             {thes} <span className="text-white ">/ day</span>
                           </p>
@@ -847,7 +847,7 @@ const Ordinal = () => {
                         <div className="text-center text-yellow-500 font  font-bold flex justify-center  items-center gap-2  text-[1rem] 2xl:text-[1rem]  ">
                           {stake &&
                             updatestake(stake).map((a) =>
-                              pointsearn3(a.snapshot, a.points)
+                              pointsearn3(a.snapshot, 150)
                             )}
                           <p className="text-white">Total:</p>
                           <GiTwoCoins /> <p> {thes2} </p>
